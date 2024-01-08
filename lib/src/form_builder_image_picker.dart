@@ -324,11 +324,17 @@ class FormBuilderImagePicker extends FormBuilderFieldDecoration<List<dynamic>> {
                     .mapIndexed((i, v) => itemBuilder(context, v, i))
                     .toList();
 
-                return previewBuilder(
+                final previewBuilderWidget = previewBuilder(
                   context,
                   widgets,
-                  canUpload ? addButtonBuilder(context) : null,
-                );
+                  canUpload ? addButtonBuilder(context) : null,);
+
+                return showDecoration
+                ? InputDecorator(
+                    decoration: state.decoration,
+                    child: previewBuilderWidget,
+                  )
+                : previewBuilderWidget; 
               });
             }
 
